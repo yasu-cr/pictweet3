@@ -6,5 +6,15 @@ class TweetsController < ApplicationController
   def new
     @tweet = Tweet.new
   end
-  
+
+  def create
+    Tweet.create(tweet_params)
+    redirect_to '/'
+  end
+
+  private  # private以下の記述はすべてプライベートメソッドになる
+  def tweet_params
+    params.require(:tweet).permit(:name, :image, :text)
+  end
+
 end
